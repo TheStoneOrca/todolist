@@ -3,10 +3,7 @@ import NextAuth from "next-auth";
 
 const { auth } = NextAuth(authConfig);
 
-export default auth((req) => {
-  console.log(req.auth);
-  console.log(req.nextUrl);
-});
+export default auth((req) => {});
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],

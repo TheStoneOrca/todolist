@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import { Fredoka } from "next/font/google";
 import { ThemeProvider } from "@/components/themeprovider";
-import "./globals.css";
 import { cn } from "@/lib/utils";
 import Footer from "@/components/footer";
 import { SessionProvider } from "next-auth/react";
+import "./globals.css";
 
 const fredoka = Fredoka({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Todoy",
-  description: "The only todo list you will ever need!",
+  title: "Portfiloy",
+  description: "The only portfilo maker you will ever need!",
 };
 
 export default function RootLayout({

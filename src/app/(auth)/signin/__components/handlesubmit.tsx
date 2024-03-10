@@ -18,12 +18,10 @@ export default async function HandleSignIn(data: any) {
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { error: "Invalid credentials!" };
+          return { error: "Invalid username or password!" };
         default:
-          return { error: "Something went wrong!" };
+          return { error: "Something went wrong! Please try again later..." };
       }
     }
-
-    throw error;
   }
 }

@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 
 type SignInBody = {
   username: string;
@@ -21,7 +22,17 @@ export async function POST(Req: Request, Res: Response) {
       const checkPassword = await bcrypt.compare(req.password, user.password);
 
       if (checkPassword) {
-        return { username: user.username, userid: user.userid } as any;
+        return NextResponse.json({
+          status: 200,
+          userJWT: jwt.sign(
+            {
+              username: user.username,
+              userid: user.userid,
+              role: user.role,
+            },
+            process.env.JWT_SECRET as string
+          ),
+        });
       }
 
       return NextResponse.json({

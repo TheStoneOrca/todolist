@@ -20,7 +20,11 @@ export default {
           );
 
           if (checkPassword) {
-            return { username: user.username, userid: user.userid } as any;
+            return {
+              username: user.username,
+              userid: user.userid,
+              role: user.role,
+            } as any;
           }
 
           return null;

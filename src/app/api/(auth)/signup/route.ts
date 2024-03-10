@@ -27,6 +27,7 @@ export async function POST(Req: Request, Res: Response) {
         data: {
           username: req.username,
           password: await bcrypt.hash(req.password, 10),
+          role: "member",
         },
       });
 

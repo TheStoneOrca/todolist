@@ -29,13 +29,17 @@ export default function SignupForm() {
       <CardHeader>
         <CardTitle>Sign Up!</CardTitle>
         <CardDescription>
-          Create an account to gain access to the Todoy!
+          Sign In to gain access to the newest Portfilo Maker!
         </CardDescription>
       </CardHeader>
       <CardContent>
         <form
-          onSubmit={handleSubmit(async (data) => {
-            HandleSignIn(data);
+          onSubmit={handleSubmit((data) => {
+            HandleSignIn(data).then((res) => {
+              if (res && res?.error) {
+                setError("password", { message: res.error });
+              }
+            });
           })}
           className="flex flex-col gap-y-2"
         >
@@ -83,6 +87,11 @@ export default function SignupForm() {
             {errors.password?.type === "minLength" && (
               <Label className="text-red-500">
                 Password has to be eight or more characters!
+              </Label>
+            )}
+            {errors.password?.message && (
+              <Label className="text-red-500">
+                {errors.password?.message as string}
               </Label>
             )}
           </div>

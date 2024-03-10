@@ -17,27 +17,24 @@ model users {
   userid Int @id @default(autoincrement())
   username String @unique
   password String
+  role String
+  pages page[]
 }
 
-model catergories {
-  catergoryid Int @id @default(autoincrement())
-  catergorycreator String
-  catergoryname String
-  todolists todolists[]
+model page {
+  pageid Int @id @default(autoincrement())
+  pagename String
+  pagecreated String
+  backgroundcolor String
+  pageowner users @relation(fields: [owner], references: [userid])
+  owner Int
+  elemets pageelement[]
 }
 
-model todolists {
-  todolistid Int @id @default(autoincrement())
-  todolistname String
-  todolistcatergory catergories @relation(fields: [catergory], references: [catergoryid])
-  catergory Int
-  items todolistenitem[]
-}
-
-model todolistenitem {
-  itemid Int @id @default(autoincrement())
-  itemtext String
-  itemdone Boolean
-  todolistreference todolists @relation(fields: [itemtodolist], references: [todolistid])
-  itemtodolist Int
+model pageelement {
+  elementid Int @id @default(autoincrement())
+  elementtype String
+  color String
+  elementpage page @relation(fields: [elementpageid], references: [pageid])
+  elementpageid Int
 }
